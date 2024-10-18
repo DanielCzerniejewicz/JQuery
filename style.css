@@ -1,0 +1,73 @@
+body {
+    background-color: darkslategrey;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#automat {
+    background-color: lightslategrey;
+    width: 35%;
+    height: 35%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 2vw;
+}
+
+#slot1, #slot2, #slot3 {
+    width: 20%;
+    height: 80%;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#slot1 img, #slot2 img, #slot3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#losowanie {
+    font-size: 2vw;
+    padding: 1vw;
+    width: 10vw;
+    margin-top: 2vw;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#losowanie:hover {
+    background-color: gray;
+}
+
+#marki {
+    font-size: 2.5vw;
+    color: antiquewhite;
+    margin-bottom: 1vw;
+}
+
+#stawiane {
+    width: 10vw;
+    border-radius: 40px;
+    background-color: antiquewhite;
+    padding: 1vw;
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+#kasa {
+    font-size: 2vw;
+    font-weight: bold;
+    margin-top: 1vw;
+    color: antiquewhite;
+    text-align: center;
+}

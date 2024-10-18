@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Jednoręki bandyta</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        let kasa = 1000;
+        function Gra() {
+            let s1 = $('#slot1');
+            let s2 = $('#slot2');
+            let s3 = $('#slot3');
+            let stawione = parseInt($('#stawiane').val());
+            let kasaWyswietl = $('#kasa');
+            let losowanieBtn = $('#losowanie');
+            let dzwiek = $('#audio')[0];
+
+            if (kasa <= 0) {
+                alert("Koniec kasy hazardzisto!");
+                location.reload();
+                return;
+            }
+
+            if (isNaN(stawione) || stawione <= 0 || stawione > kasa) {
+                alert("Nie możesz postawić więcej niż masz!");
+                return;
+            }
+
+            losowanieBtn.prop('disabled', true);
+            dzwiek.play();
+
+            let tab = ['Strawberry.png', 'Pomarancza.png', 'Cytryna.png', 'Gruszka.png'];
+
+            let interval = setInterval(() => {
+                s1.html(`<img src="foty/${tab[Math.floor(Math.random() * 4)]}" alt="Slot 1">`);
+                s2.html(`<img src="foty/${tab[Math.floor(Math.random() * 4)]}" alt="Slot 2">`);
+                s3.html(`<img src="foty/${tab[Math.floor(Math.random() * 4)]}" alt="Slot 3">`);
+            }, 100);
+
+            setTimeout(() => {
+                clearInterval(interval);
+
+                let r1 = Math.floor(Math.random() * 4);
+                let r2 = Math.floor(Math.random() * 4);
+                let r3 = Math.floor(Math.random() * 4);
+
+                s1.html(`<img src="foty/${tab[r1]}" alt="Slot 1">`);
+                s2.html(`<img src="foty/${tab[r2]}" alt="Slot 2">`);
+                s3.html(`<img src="foty/${tab[r3]}" alt="Slot 3">`);
+
+                if (r1 === r2 && r2 === r3) {
+                    alert("Wygrana");
+                    kasa += stawione * 2;
+                } else {
+                    kasa -= stawione;
+                }
+
+                kasaWyswietl.text(`Aktualna kasa: ${kasa} zł`);
+                losowanieBtn.prop('disabled', false);
+
+            }, 2000);
+        }
+    </script>
+</head>
+<body>
+<marquee id="marki">Jednoręki bandyta</marquee>
+<div id="automat">
+    <div id="slot1"></div>
+    <div id="slot2"></div>
+    <div id="slot3"></div>
+</div>
+<div id="kasa">Aktualna kasa: 1000 zł</div>
+<input type="number" placeholder="Postaw" id="stawiane">
+<input type="button" id="losowanie" value="GRAJ" onclick="Gra()">
+
+<audio id="audio" src="los.mp3"></audio>
+</body>
+</html>
